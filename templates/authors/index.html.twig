@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Liste des auteurs enregistrés{% endblock %}
+
+{% block body %}
+    {% set authorsNumber = authors | length %}
+
+    <h1 class="text-center text-muted mb-6"> Les auteurs enregistrés</h1>
+
+    {% if authorsNumber > 0 %}
+
+        <div class="row mt-6 mb-5 bg-white shadow rounded">
+            {% for row in authors|batch(authorsNumber/3) %}
+                <div class="col-md-4">
+                    <article class="">
+                        {% for author in row %}
+                            <h2 class="h5 px-3 pt-3"><a href="{{ path('app_authors_show', {'id':author.id}) }}"
+                                                        class="text-muted text-decoration-none text-secondary"> {{ author.fullname }}</a>
+                            </h2>
+                        {% endfor %}
+                    </article>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center mt-5 h1"> No author yet. <a href="{{ path('app_authors_create') }}">Be the first!</a></p>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+        {% include('layouts/partials/_flash_messages.html.twig') %}
+        {% include('layouts/partials/_navbar.html.twig') %}
+        <main role="main" class="ml-5 mr-5">
+            {% block body %}{% endblock %}
+        </main>
+        {% include('layouts/partials/_footer.html.twig') %}
+        {{ encore_entry_script_tags('app') }}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title author.fullname %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <article class="bg-white rounded shadow author">
+                <div class="p-3">
+                    <h1 class="h5 text-muted"> {{ author.fullname }}</h1>
+                    <p class="text-muted"><small> Ajouté en base de données le
+                            <time datetime="{{ author.createdAt|date('Y-m-d H:i:s') }}">{{ author.createdAt|date('Y-m-d') }} </time>
+                            by [Owner full Name] </small></p>
+                    <p class="pt-3 text-break">description</p>
+
+                    <div class="pt-3">
+                        <a href="{{ path('app_authors_edit', {id: author.id}) }}" class="btn btn-light">Edit</a>
+                        <a href="https://google.com"
+                           onclick="event.preventDefault(); confirm('Are you sure?') && document.getElementById('js-author-delete-form').submit();"
+                           class="btn btn-light">Delete</a>
+                        <form id="js-author-delete-form" action="{{ path('app_authors_delete', {id: author.id}) }}" method="post"
+                              style="display: none">
+                            <input type="text" name="csrf_token" value="{{ csrf_token('author_deletion_' ~ author.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+
+{% endblock %}

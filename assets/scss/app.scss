@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Josefin+Sans&display=swap');
+@import '_shared/variables';
+@import "~bootstrap";
+
+html, body {
+    font-family: $body-font, sans-serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: $title-font;
+}
+
+.mt-6 {
+    margin-top: 4rem;
+}
+.mb-6 {
+    margin-bottom: 4rem;
+}
