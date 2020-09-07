@@ -25,7 +25,7 @@ class BookController extends AbstractController
      */
     public function index(BookRepository $bookRepository)
     {
-        $books = $bookRepository->findBy([], ['lastName' => 'ASC' ]);
+        $books = $bookRepository->findBy([], ['title' => 'ASC' ]);
         return $this->render('books/index.html.twig', compact('books'));
     }
     /**

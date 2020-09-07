@@ -7,16 +7,17 @@
 
     <h1 class="text-center text-muted mb-6"> Les livres enregistrés</h1>
 
-    {% if booksNumber > 0 %}
+    {% if bookNumber > 0 %}
 
         <div class="row mt-6 mb-5 bg-white shadow rounded">
-            {% for row in books|batch(booksNumber/3) %}
+            {% for row in books|batch(bookNumber/3) %}
                 <div class="col-xl-4 col-md-12">
                     <article>
                         {% for book in row %}
                             <h2 class="h5 px-3 pt-3"><a href="{{ path('app_books_show', {'id':book.id}) }}"
-                                                        class="text-muted text-decoration-none text-secondary"> {{ book.fullname }}</a>
+                                                        class="text-muted text-decoration-none text-secondary"> {{ book.title }}</a>
                             </h2>
+                            <p> {% for author in book.author %} {{ author.fullName }} {% endfor %}</p>
                         {% endfor %}
                     </article>
                 </div>
