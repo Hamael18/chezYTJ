@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title collection.name %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <article class="bg-white rounded shadow collection">
+                <div class="p-3">
+                    <h1 class="h5 text-muted"> {{ collection.name }}</h1>
+                    <p class="text-muted"><small> Ajouté⋅e en base de données le
+                            <time datetime="{{ collection.createdAt|date('Y-m-d H:i:s') }}">{{ collection.createdAt|date('Y-m-d') }} </time>
+                            by [Owner full Name] </small></p>
+                    <p class="pt-3 text-break">description</p>
+
+                    <div class="pt-3">
+                        <a href="{{ path('app_collections_edit', {id: collection.id}) }}" class="btn btn-light">Edit</a>
+                        <a href="https://google.com"
+                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer cette collection?') && document.getElementById('js-collection-delete-form').submit();"
+                           class="btn btn-light">Delete</a>
+                        <form id="js-collection-delete-form" action="{{ path('app_collections_delete', {id: collection.id}) }}" method="post"
+                              style="display: none">
+                            <input type="text" name="csrf_token" value="{{ csrf_token('collection_deletion_' ~ collection.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+
+{% endblock %}

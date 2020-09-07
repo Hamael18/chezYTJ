@@ -104,4 +104,9 @@ class Author
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
+
+    public function __toString(): string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
+    }
 }
