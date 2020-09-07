@@ -1,0 +1,16 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Nouveau livre' %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-6 mx-auto">
+            <h1 class="text-center">Ajouter un livre</h1>
+
+            {{ include('books/_form.html.twig') }}
+        </div>
+    </div>
+
+
+{% endblock %}

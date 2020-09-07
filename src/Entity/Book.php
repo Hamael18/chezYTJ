@@ -49,24 +49,24 @@ class Book
         return $this->id;
     }
 
-    public function getTitre(): ?string
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitre(string $title): self
+    public function setTitle(string $title): self
     {
         $this->title = $title;
 
         return $this;
     }
 
-    public function getNumero(): ?string
+    public function getNumber(): ?string
     {
         return $this->number;
     }
 
-    public function setNumero(string $number): self
+    public function setNumber(string $number): self
     {
         $this->number = $number;
 
