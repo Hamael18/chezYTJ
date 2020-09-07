@@ -1,9 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&family=Josefin+Sans&display=swap');
+@import url('/assets/fonts/pine_forest_press-webfont.woff2');
 @import '_shared/variables';
 @import "~bootstrap";
 
 html, body {
     font-family: $body-font, sans-serif;
+    .h1, .h2, .h3, .h4, .h5 {
+        font-family: $title-font;
+    }
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $title-font;
@@ -14,4 +18,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 .mb-6 {
     margin-bottom: 4rem;
+}
+.alert {
+    padding: 10px;
+    color: white;
+    text-align: center;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+
+    &.alert-success {
+        background-color: mediumseagreen;
+    }
+    &.alert-error {
+        background-color: indianred;
+    }
+    &.alert-info {
+        background-color: steelblue;
+    }
+}
+
+.btn-primary {
+    background-color: lightcoral;
+    border-color: lightcoral;
 }

@@ -1,13 +1,13 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title 'Edition de l\'auteur n°' ~ author.id %}
+{% block title 'Edition de l\'auteur⋅trice n°' ~ author.id %}
 
 {% block body %}
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <h1>Editer l'auteur</h1>
+            <h1>Editer l'auteur⋅trice</h1>
 
-            {{ include('authors/_form.html.twig', {"submitButtonText": "Editer l'auteur"}) }}
+            {{ include('authors/_form.html.twig', {"submitButtonText": "Editer l'auteur⋅trice"}) }}
         </div>
     </div>
 {% endblock %}

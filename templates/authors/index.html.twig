@@ -11,8 +11,8 @@
 
         <div class="row mt-6 mb-5 bg-white shadow rounded">
             {% for row in authors|batch(authorsNumber/3) %}
-                <div class="col-md-4">
-                    <article class="">
+                <div class="col-xl-4 col-md-12">
+                    <article>
                         {% for author in row %}
                             <h2 class="h5 px-3 pt-3"><a href="{{ path('app_authors_show', {'id':author.id}) }}"
                                                         class="text-muted text-decoration-none text-secondary"> {{ author.fullname }}</a>

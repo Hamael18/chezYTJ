@@ -52,7 +52,7 @@ class AuthorController extends AbstractController
             $this->manager->persist($author);
             $this->manager->flush();
 
-            $this->addFlash('success','L\'auteur a été créé');
+            $this->addFlash('success','L\'auteur⋅trice a été créé⋅e');
 
             return $this->redirectToRoute('authors');
         }
@@ -75,7 +75,7 @@ class AuthorController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
 
-            $this->addFlash('success','Auteur édité avec succes');
+            $this->addFlash('success','L\'auteur⋅trice a été édité⋅e');
 
             return $this->redirectToRoute('authors');
         }
@@ -95,7 +95,7 @@ class AuthorController extends AbstractController
         {
             $this->manager->remove($author);
             $this->manager->flush();
-            $this->addFlash('info','Auteur supprimé');
+            $this->addFlash('info','L\'auteur⋅trice a été supprimé⋅e');
 
         }
 

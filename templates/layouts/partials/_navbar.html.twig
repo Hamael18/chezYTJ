@@ -1,21 +1,66 @@
 <nav class="navbar navbar-expand-sm navbar-light bg-light mb-4">
-    <div class="container">
-        <a class="navbar-brand" href="#">Chez Yann&Thomas&Julie</a>
+    <div class="container-fluid">
+        <a class="navbar-brand h2" href="#">Chez Yann&Thomas&Julie</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03"
                 aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"> </span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarsExample03">
             <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_authors_create') }}">New Author </a>
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Auteurs
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="{{ path('authors') }}"> Liste des auteurs </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="{{ path('app_authors_create') }}">Ajouter un auteur</a></button>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">New Book </a>
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Bibliothèque
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Bibliothèque de Yann </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Bibliothèque de Thomas </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Bibliothèque de Julie </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Toutes les bibliothèques </a></button>
+                            </div>
+                        </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">New Wish </a>
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Cadeaux
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Liste de Yann </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Liste de Thomas </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Liste de Julie </a></button>
+
+                                <button class="dropdown-item" type="button">
+                                    <a class="nav-link" href="#"> Liste commune </a></button>
+                            </div>
+                        </div>
                     </li>
             </ul>
         </div>

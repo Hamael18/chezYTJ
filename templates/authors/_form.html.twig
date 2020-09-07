@@ -1,4 +1,6 @@
 {{ form_start(form) }}
 {{ form_widget(form) }}
-<input type="submit" value="{{ submitButtonText ?? 'Create an author' }}" class="btn btn-primary btn-block" formnovalidate>
+<div class="form-inline">
+<input type="submit" value="{{ submitButtonText ?? 'Ajouter l\'auteur⋅trice' }}" class="btn btn-primary mx-auto" formnovalidate>
+</div>
 {{ form_end(form) }}
