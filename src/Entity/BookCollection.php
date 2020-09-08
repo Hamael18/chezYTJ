@@ -3,20 +3,21 @@
 namespace App\Entity;
 
 use App\Entity\Traits\Timestampable;
-use App\Repository\AuthorRepository;
+use App\Repository\CollectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=AuthorRepository::class)
- * @ORM\Table(name="authors")
+ * @ORM\Entity(repositoryClass=CollectionRepository::class)
+ * @ORM\Table(name="collections")
  * @ORM\HasLifecycleCallbacks()
  */
-class Author
+class BookCollection
 {
     use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -25,21 +26,22 @@ class Author
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $firstName;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      * @Assert\Length(min=3)
+     *
      */
-    private $lastName;
+    private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Book::class, mappedBy="author")
+     * @ORM\OneToMany(targetEntity=Book::class, mappedBy="collection")
      */
     private $books;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     public function __construct()
     {
@@ -51,26 +53,14 @@ class Author
         return $this->id;
     }
 
-    public function getFirstName(): ?string
+    public function getName(): ?string
     {
-        return $this->firstName;
+        return $this->name;
     }
 
-    public function setFirstName(?string $firstName): self
+    public function setName(string $name): self
     {
-        $this->firstName = $firstName;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->lastName;
-    }
-
-    public function setLastName(string $lastName): self
-    {
-        $this->lastName = $lastName;
+        $this->name = $name;
 
         return $this;
     }
@@ -87,7 +77,7 @@ class Author
     {
         if (!$this->books->contains($book)) {
             $this->books[] = $book;
-            $book->addAuthor($this);
+            $book->setCollection($this);
         }
 
         return $this;
@@ -97,19 +87,29 @@ class Author
     {
         if ($this->books->contains($book)) {
             $this->books->removeElement($book);
-            $book->removeAuthor($this);
+            // set the owning side to null (unless already changed)
+            if ($book->getCollection() === $this) {
+                $book->setCollection(null);
+            }
         }
 
         return $this;
     }
 
-    public function getFullName(): string
-    {
-        return $this->getFirstName() . ' ' . $this->getLastName();
-    }
-
     public function __toString(): string
     {
-        return $this->getFirstName() . ' ' . $this->getLastName();
+        return $this->name;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
     }
 }

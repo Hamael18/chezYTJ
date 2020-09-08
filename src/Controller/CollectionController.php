@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Collection;
+use App\Entity\BookCollection;
 use App\Form\CollectionType;
 use App\Repository\CollectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,11 +34,11 @@ class CollectionController extends AbstractController
     }
 
     /**
-     * @Route("/create", name="app_collection_create", methods={"GET","POST"})
+     * @Route("/create", name="app_collections_create", methods={"GET","POST"})
      */
     public function create(Request $request): Response
     {
-        $collection = new Collection();
+        $collection = new BookCollection();
         $form = $this->createForm(CollectionType::class, $collection);
         $form->handleRequest($request);
 
@@ -61,7 +61,7 @@ class CollectionController extends AbstractController
     /**
      * @Route("/{id<[0-9]+>}", name="app_collections_show", methods={"GET"})
      */
-    public function show(Collection $collection): Response
+    public function show(BookCollection $collection): Response
     {
         return $this->render('collection/show.html.twig', [
             'collection' => $collection,
@@ -71,7 +71,7 @@ class CollectionController extends AbstractController
     /**
      * @Route("/{id<[0-9]+>}/edit", name="app_collections_edit", methods={"GET","PUT"})
      */
-    public function edit(Request $request, Collection $collection): Response
+    public function edit(Request $request, BookCollection $collection): Response
     {
         $form = $this->createForm(CollectionType::class, $collection, [
             'method' => 'PUT'
@@ -95,7 +95,7 @@ class CollectionController extends AbstractController
     /**
      * @Route("/{id<[0-9]+>}", name="app_collections_delete", methods={"DELETE"})
      */
-    public function delete(Request $request, Collection $collection): Response
+    public function delete(Request $request, BookCollection $collection): Response
     {
         if ($this->isCsrfTokenValid('collection_deletion_'.$collection->getId(), $request->request->get('_token'))) {
             $this->manager->remove($collection);
