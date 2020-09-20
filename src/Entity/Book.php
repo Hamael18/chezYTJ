@@ -54,9 +54,15 @@ class Book
      */
     private $collection;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="library")
+     */
+    private $users;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -134,6 +140,34 @@ class Book
     public function setCollection(?BookCollection $collection): self
     {
         $this->collection = $collection;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getUsers(): Collection
+    {
+        return $this->users;
+    }
+
+    public function addUser(User $user): self
+    {
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
+            $user->addLibrary($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $user): self
+    {
+        if ($this->users->contains($user)) {
+            $this->users->removeElement($user);
+            $user->removeLibrary($this);
+        }
 
         return $this;
     }
