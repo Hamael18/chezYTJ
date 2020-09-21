@@ -38,7 +38,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/books/create", name="app_books_create", methods={"GET", "POST"})
+     * @Route("/admin/books/create", name="app_books_create", methods={"GET", "POST"})
      */
     public function create(Request $request): Response
     {
@@ -62,7 +62,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/books/{id<[0-9]+>}/edit", name="app_books_edit", methods={"GET", "PUT"})
+     * @Route("/admin/books/{id<[0-9]+>}/edit", name="app_books_edit", methods={"GET", "PUT"})
      */
     public function edit(Book $book, Request $request): Response
     {
@@ -86,7 +86,7 @@ class BookController extends AbstractController
     }
 
     /**
-     * @Route("/books/{id<[0-9]+>}", name="app_books_delete", methods={"DELETE"})
+     * @Route("/admin/books/{id<[0-9]+>}", name="app_books_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Book $book): Response
     {
