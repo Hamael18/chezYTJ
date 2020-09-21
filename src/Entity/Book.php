@@ -171,4 +171,15 @@ class Book
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        $authors = $this->getAuthor();
+
+        if (!$authors) {
+            return $this->getTitle() . ' de inconnu.';
+        }
+
+        return $this->getTitle() . ' de ' . $authors[0] . '.';
+    }
 }

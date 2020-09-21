@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/collections")
+ * @Route("/admin/collection")
  */
 class CollectionController extends AbstractController
 {

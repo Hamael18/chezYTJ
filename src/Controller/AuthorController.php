@@ -41,11 +41,10 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/authors/create", name="app_authors_create", methods={"GET", "POST"})
+     * @Route("/author/create", name="app_authors_create", methods={"GET", "POST"})
      */
     public function create(Request $request): Response
     {
-
         $author = new Author();
         $form = $this->createForm(AuthorType::class, $author);
         $form->handleRequest($request);
@@ -65,7 +64,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/authors/{id<[0-9]+>}/edit", name="app_authors_edit", methods={"GET", "PUT"})
+     * @Route("/author/{id<[0-9]+>}/edit", name="app_authors_edit", methods={"GET", "PUT"})
      */
     public function edit(Author $author, Request $request): Response
     {
@@ -89,7 +88,7 @@ class AuthorController extends AbstractController
     }
 
     /**
-     * @Route("/authors/{id<[0-9]+>}", name="app_authors_delete", methods={"DELETE"})
+     * @Route("/author/{id<[0-9]+>}", name="app_authors_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Author $author): Response
     {
