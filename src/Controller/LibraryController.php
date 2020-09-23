@@ -40,7 +40,7 @@ class LibraryController extends AbstractController
     }
 
     /**
-     * @Route("/library/{id<[0-9]+>}", name="app_libraries_show", methods={"GET"})
+     * @Route("/library/{firstName}", name="app_libraries_show", methods={"GET"})
      */
     public function show(User $user): Response
     {

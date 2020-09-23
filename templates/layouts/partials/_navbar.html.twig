@@ -57,13 +57,13 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                             <button class="dropdown-item" type="button">
-                                <a class="nav-link" href="{{ path('app_libraries_show', {id: 1}) }}"> Bibliothèque de Yann </a></button>
+                                <a class="nav-link" href="{{ path('app_libraries_show', {'firstName': 'Yann'}) }}"> Bibliothèque de Yann </a></button>
 
                             <button class="dropdown-item" type="button">
-                                <a class="nav-link" href="#"> Bibliothèque de Thomas </a></button>
+                                <a class="nav-link" href="{{ path('app_libraries_show', {'firstName': 'Thomas'}) }}"> Bibliothèque de Thomas </a></button>
 
                             <button class="dropdown-item" type="button">
-                                <a class="nav-link" href="#"> Bibliothèque de Julie </a></button>
+                                <a class="nav-link" href="{{ path('app_libraries_show', {'firstName': 'Julie'}) }}"> Bibliothèque de Julie </a></button>
 
                             <button class="dropdown-item" type="button">
                                 <a class="nav-link" href="{{ path('libraries') }}"> Toutes les bibliothèques </a></button>
