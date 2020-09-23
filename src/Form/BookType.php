@@ -33,6 +33,8 @@ class BookType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer l\'image',
                 'download_uri' => false,
+                'imagine_pattern' => 'squared_thumbnail_medium',
+
             ])
             ->add('author', EntityType::class,[
                 'label' => 'Auteur⋅trice (s)',
