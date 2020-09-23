@@ -5,10 +5,16 @@
 {% block body %}
 
     <div class="row">
-        <div class="col-md-6 mx-auto">
-            <h1 class="text-center">Ajouter un livre</h1>
+        <div class="col-md-8 mx-auto">
+    <div class="bg-white rounded shadow collection">
+        <div class="p-3">
+            <h1 class="text-center text-primary">
+                Ajouter un livre
+            </h1>
 
             {{ include('books/_form.html.twig') }}
+        </div>
+    </div>
         </div>
     </div>
 

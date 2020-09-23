@@ -1,14 +1,45 @@
 {% extends 'layouts/base.html.twig' %}
-{% block title %} 'Bibliothèque de' ~ {{ user.firstName }} {% endblock %}
+{% block title %} Bibliothèque de {{ user.firstName }} {% endblock %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <article class="bg-white rounded shadow collection">
-                <div class="p-3">
-                    <h1 class="h5 text-muted"> Bibliothèque de {{ user.firstName }} </h1>
+    {% set bookNumber = user.library | length %}
+
+    <div class="col-md-10 mx-auto">
+        <div class="bg-white rounded shadow collection">
+            <div class="p-3">
+                <h1 class="text-center text-primary">
+                    Bibliothèque de {{ user.firstName }}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_libraries_add', {id : user.id}) }}" class="text-primary"
+                           data-toggle="tooltip" data-placement="top"
+                           title="Ajouter un livre à la bibliothèque de {{ user.firstName }}">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-bookmark-plus-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+                </h1>
+            </div>
+            {% if bookNumber > 0 %}
+                <div class="d-flex flex-wrap bg-white shadow rounded">
+                    {% for row in user.library|batch(bookNumber/4) %}
+                        <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                                {% for book in row %}
+                                    {% include 'layouts/partials/_bookcard.html.twig' %}
+                                {% endfor %}
+                        </div>
+                    {% endfor %}
                 </div>
-            </article>
+
+            {% else %}
+                <div class="text-center mt-5 h1"> Aucun livre !
+                    {% if app.user %}<a href="{{ path('app_books_create') }}">
+                        Ajouter un premier livre ici !</a>
+                    {% endif %}
+                </div>
+            {% endif %}
         </div>
     </div>
 
