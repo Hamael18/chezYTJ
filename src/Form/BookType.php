@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class BookType extends AbstractType
 {
@@ -26,6 +27,13 @@ class BookType extends AbstractType
                 'label' => 'Numéro de la collection',
             ])
             ->add('description', TextareaType::class)
+            ->add('imageFile', VichImageType::class, [
+                'label' => 'Image du livre (jpg ou png)',
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'Supprimer l\'image',
+                'download_uri' => false,
+            ])
             ->add('author', EntityType::class,[
                 'label' => 'Auteur⋅trice (s)',
                 'class'=> Author::class,
