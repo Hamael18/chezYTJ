@@ -5,21 +5,43 @@
 {% block body %}
     <div class="row">
         <div class="col-md-6 mx-auto">
-            <h1 class="text-center">Welcome</h1>
+            <h1 class="text-center text-primary my-5">Welcome</h1>
         </div>
     </div>
     <div class="row">
         <div class="col-4 text-center">
-            <p>Bibliothèque de Yann</p>
-            <p>Idées cadeaux pour Yann</p>
+            <div>
+                <h3>Bibliothèque de Yann</h3>
+                <a href="{{ path('app_libraries_show', {'firstName': 'Yann'}) }}"> <img
+                            src="{{ asset('build/images/biblio.jpg') }}" alt="Bibliothèque"></a>
+            </div>
+            <div>
+                <h3 class="mt-5">Idées cadeaux pour Yann</h3>
+                <img src="{{ asset('build/images/cadeau.jpg') }}" alt="Bibliothèque">
+            </div>
+
         </div>
         <div class="col-4 text-center">
-            <p>Bibliothèque de Thomas</p>
-            <p>Idées cadeaux pour Thomas</p>
+            <div>
+                <h3>Bibliothèque de Thomas</h3>
+                <a href="{{ path('app_libraries_show', {'firstName': 'Thomas'}) }}"> <img
+                            src="{{ asset('build/images/biblio.jpg') }}" alt="Bibliothèque"></a>
+            </div>
+            <div>
+                <h3 class="mt-5">Idées cadeaux pour Thomas</h3>
+                <img src="{{ asset('build/images/cadeau.jpg') }}" alt="Bibliothèque">
+            </div>
         </div>
         <div class="col-4 text-center">
-            <p>Bibliothèque de Julie</p>
-            <p>Idées cadeaux pour Julie</p>
+            <div>
+                <h3>Bibliothèque de Julie</h3>
+                <a href="{{ path('app_libraries_show', {'firstName': 'Julie'}) }}"> <img
+                            src="{{ asset('build/images/biblio.jpg') }}" alt="Bibliothèque"></a>
+            </div>
+            <div>
+                <h3 class="mt-5">Idées cadeaux pour Julie</h3>
+                <img src="{{ asset('build/images/cadeau.jpg') }}" alt="Bibliothèque">
+            </div>
         </div>
     </div>
 {% endblock %}
