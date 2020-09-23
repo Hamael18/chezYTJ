@@ -59,6 +59,11 @@ class Book
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageName;
+
     public function __construct()
     {
         $this->author = new ArrayCollection();
@@ -181,5 +186,17 @@ class Book
         }
 
         return $this->getTitle() . ' de ' . $authors[0] . '.';
+    }
+
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    public function setImageName(?string $imageName): self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
     }
 }
