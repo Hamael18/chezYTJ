@@ -4,44 +4,64 @@
 @import '~bootstrap';
 
 html, body {
-    font-family: $body-font, sans-serif;
-    .h1, .h2, .h3, .h4, .h5 {
-        font-family: $title-font;
-    }
-}
-h1, h2, h3, h4, h5, h6 {
+  font-family: $body-font, sans-serif;
+
+  .h1, .h2, .h3, .h4, .h5 {
     font-family: $title-font;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $title-font;
 }
 
 .mt-6 {
-    margin-top: 4rem;
+  margin-top: 4rem;
 }
-.mb-6 {
-    margin-bottom: 4rem;
-}
-.alert {
-    padding: 10px;
-    color: white;
-    text-align: center;
-    margin: 0;
-    border: none;
-    border-radius: 0;
 
-    &.alert-success {
-        background-color: mediumseagreen;
-    }
-    &.alert-error {
-        background-color: indianred;
-    }
-    &.alert-info {
-        background-color: steelblue;
-    }
+.mb-6 {
+  margin-bottom: 4rem;
+}
+
+.alert {
+  padding: 10px;
+  color: white;
+  text-align: center;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+
+  &.alert-success {
+    background-color: mediumseagreen;
+  }
+
+  &.alert-error {
+    background-color: indianred;
+  }
+
+  &.alert-info {
+    background-color: steelblue;
+  }
 }
 
 .btn-primary {
-    background-color: lightcoral;
-    border-color: lightcoral;
+  background-color: lightcoral;
+  border-color: lightcoral;
 }
+
 .text-primary {
-    color: lightcoral !important;
+  color: lightcoral !important;
+}
+
+.vich-image {
+  .form-check {
+    @extend .mt-3
+  }
+
+  img {
+    @extend .mb-2;
+    @extend .rounded;
+    @extend .shadow;
+    @extend .img-thumbnail;
+  }
 }
