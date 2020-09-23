@@ -22,16 +22,7 @@
                     {% endif %}
                 </h3>
                 {% for book in user.library %}
-                    <div class="card mt-3" style="width: 18rem;">
-                        <img class="card-img-top" src="..." alt="Card image cap">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="{{ path('app_books_show', {'id':book.id}) }}" class="text-decoration-none text-secondary">{{ book.title }}</a></h5>
-                            <p class="card-subtitle mb-2 text-muted">
-                                {% for author in book.author %} {{ author.fullName }}{% if not loop.last %},  {% endif %} {% endfor %}
-                            </p>
-                            <p class="card-text">{{ book.description }}</p>
-                        </div>
-                    </div>
+                    {% include 'layouts/partials/_bookcard.html.twig' %}
                 {% endfor %}
             </div>
         {% endfor %}

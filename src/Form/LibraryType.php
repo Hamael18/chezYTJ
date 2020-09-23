@@ -17,6 +17,7 @@ class LibraryType extends AbstractType
             ->add('library', EntityType::class, [
                 'class' => Book::class,
                 'multiple' => true,
+                'expanded' => true,
                 'label' => 'Choisissez le ou les livres à ajouter',
             ])
         ;

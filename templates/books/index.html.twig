@@ -14,17 +14,14 @@
                 <div class="col-xl-4 col-md-12">
                     <article>
                         {% for book in row %}
-                            <h2 class="h5 px-3 pt-3"><a href="{{ path('app_books_show', {'id':book.id}) }}"
-                                                        class="text-muted text-decoration-none text-secondary"> {{ book.title }}</a>
-                            </h2>
-                            <p> {% for author in book.author %} {{ author.fullName }} {% endfor %}</p>
+                            {% include 'layouts/partials/_bookcard.html.twig' %}
                         {% endfor %}
                     </article>
                 </div>
             {% endfor %}
         </div>
     {% else %}
-        <p class="text-center mt-5 h1"> No book yet. <a href="{{ path('app_books_create') }}">Be the first!</a></p>
+        <p class="text-center mt-5 h1"> Aucun livre ! <a href="{{ path('app_books_create') }}">Ajouter un premier livre ici !</a></p>
     {% endif %}
 
 {% endblock %}

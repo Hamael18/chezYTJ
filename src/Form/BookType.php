@@ -33,6 +33,7 @@ class BookType extends AbstractType
             ])
             ->add('collection', EntityType::class, [
                 'class' => BookCollection::class,
+                'placeholder' => 'Choissisez une collection (optionnel)'
             ])
 
         ;
