@@ -1,31 +1,52 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block title collection.name %}
+    {% set bookNumber = collection.books | length %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <article class="bg-white rounded shadow collection">
-                <div class="p-3">
-                    <h1 class="text-muted"> {{ collection.name }}</h1>
-                    <p class="text-muted"><small> Ajouté⋅e en base de données le
-                            <time datetime="{{ collection.createdAt|date('Y-m-d H:i:s') }}">{{ collection.createdAt|date('Y-m-d') }} </time>
-                            by [Owner full Name] </small></p>
-                    <p class="pt-3 text-break">{{ collection.description }}</p>
+    <div class="col-md-10 mx-auto">
+        <div class="bg-white rounded shadow collection">
+            <div class="pt-3">
+                <h1 class="text-center text-primary">
+                    {{ collection.name }}
+                </h1>
+                <p class="text-muted text-center"><small> Ajouté⋅e en base de données le
+                        <time datetime="{{ collection.createdAt|date('Y-m-d H:i:s') }}">{{ collection.createdAt|date('Y-m-d') }} </time>
+                    </small></p>
+                {% if collection.description %}<p class="pt-3 text-break">{{ collection.description }}</p>
+            {% endif %}
+            </div>
 
-                    <div class="pt-3">
-                        <a href="{{ path('app_collections_edit', {id: collection.id}) }}" class="btn btn-light">Edit</a>
-                        <a href="https://google.com"
-                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer cette collection?') && document.getElementById('js-collection-delete-form').submit();"
-                           class="btn btn-light">Delete</a>
-                        <form id="js-collection-delete-form" action="{{ path('app_collections_delete', {id: collection.id}) }}" method="post"
-                              style="display: none">
-                            <input type="text" name="csrf_token" value="{{ csrf_token('collection_deletion_' ~ collection.id) }}">
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
-                    </div>
+
+            <div class="pt-3 text-center">
+                <a href="{{ path('app_collections_edit', {id: collection.id}) }}" class="btn btn-light">Edit</a>
+                <a href="https://google.com"
+                   onclick="event.preventDefault(); confirm('Voulez-vous supprimer cette collection?') && document.getElementById('js-collection-delete-form').submit();"
+                   class="btn btn-light">Delete</a>
+                <form id="js-collection-delete-form" action="{{ path('app_collections_delete', {id: collection.id}) }}"
+                      method="post"
+                      style="display: none">
+                    <input type="text" name="csrf_token"
+                           value="{{ csrf_token('collection_deletion_' ~ collection.id) }}">
+                    <input type="hidden" name="_method" value="DELETE">
+                </form>
+            </div>
+            {% if bookNumber > 0 %}
+                <div class="d-flex flex-wrap bg-white shadow rounded">
+                    {% for row in collection.books|batch(bookNumber/3) %}
+                        <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                            {% for book in row %}
+                                {% include 'layouts/partials/_bookcard.html.twig' %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
                 </div>
-            </article>
+            {% else %}
+                <div class="text-center mt-5 h1">
+                    Aucun livre dans cette collection !
+                </div>
+            {% endif %}
+
         </div>
     </div>
 

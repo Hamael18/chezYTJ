@@ -3,16 +3,18 @@
 {% block title 'Nouvelle collection' %}
 
 {% block body %}
-    <div class="row">
-        <div class="col-md-6 mx-auto">
-            <h1 class="text-center">Toutes nos bibliothèques</h1>
-        </div>
+    <div class="col-md-10 mx-auto">
+        <div class="bg-white rounded shadow collection">
+            <div class="p-3">
+                <h1 class="text-center text-primary">
+                    Toutes nos bibliothèques</h1>
+            </div>
     </div>
-    <div class="row">
-
+    <div class="d-flex flex-wrap bg-white shadow rounded">
         {% for user in users %}
             <div class="col-4 text-center mt-5">
-                <h3 class="text-primary">
+                <a href="{{ path('app_libraries_show', {'firstName': user.firstname}) }}" class="text-primary">
+                    <h3>
                     Bibliothèque de {{ user.firstName }}
                     {% if is_granted('ROLE_ADMIN') %}
                         <a href="{{ path('app_libraries_add', {id : user.id}) }}" class="text-primary" data-toggle="tooltip" data-placement="top" title="Ajouter un livre à la bibliothèque de {{ user.firstName}}">
@@ -22,10 +24,13 @@
                     {% endif %}
                 </h3>
                 {% for book in user.library %}
+                    <div class="d-flex flex-wrap">
                     {% include 'layouts/partials/_bookcard.html.twig' %}
+                    </div>
                 {% endfor %}
             </div>
         {% endfor %}
+    </div>
     </div>
 
 {% endblock %}
