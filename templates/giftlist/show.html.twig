@@ -1,0 +1,47 @@
+{% extends 'layouts/base.html.twig' %}
+{% block title %} Idées cadeaux pour {{ user.firstName }} {% endblock %}
+
+{% block body %}
+    {% set giftNumber = user.library | length %}
+
+    <div class="col-md-10 mx-auto">
+        <div class="bg-white rounded shadow collection">
+            <div class="p-3">
+                <h1 class="text-center text-primary">
+                    Idées cadeaux pour {{ user.firstName }}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{ path('app_giftlists_add', {id : user.id}) }}" class="text-primary"
+                           data-toggle="tooltip" data-placement="top"
+                           title="Ajouter un cadeau à la liste d'idées pour {{ user.firstName }}">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-giftmark-plus-fill"
+                                 fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                      d="M4 0a2 2 0 0 0-2 2v13.5a.5.5 0 0 0 .74.439L8 13.069l5.26 2.87A.5.5 0 0 0 14 15.5V2a2 2 0 0 0-2-2H4zm4.5 4.5a.5.5 0 0 0-1 0V6H6a.5.5 0 0 0 0 1h1.5v1.5a.5.5 0 0 0 1 0V7H10a.5.5 0 0 0 0-1H8.5V4.5z"/>
+                            </svg>
+                        </a>
+                    {% endif %}
+                </h1>
+            </div>
+            {% if giftNumber > 0 %}
+                <div class="d-flex flex-wrap bg-white shadow rounded">
+                    {% for row in user.gifts|batch(giftNumber/4) %}
+                        <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                            {% for gift in row %}
+                                {% include 'layouts/partials/_giftcard.html.twig' %}
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+                </div>
+
+            {% else %}
+                <div class="text-center mt-5 h1"> Aucun livre !
+                    {% if app.user %}<a href="{{ path('app_gifts_create') }}">
+                            Ajouter un premier cadeau ici !</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}
