@@ -78,13 +78,13 @@
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
                             <button class="dropdown-item" type="button">
-                                <a class="nav-link" href="#"> Liste de Yann </a></button>
+                                <a class="nav-link" href="{{ path('app_giftlists_show', {'firstName': 'Yann'}) }}"> Idées cadeaux pour Yann </a></button>
 
                             <button class="dropdown-item" type="button">
-                                <a class="nav-link" href="#"> Liste de Thomas </a></button>
+                                <a class="nav-link" href="{{ path('app_giftlists_show', {'firstName': 'Thomas'}) }}"> Idées cadeaux pour Thomas </a></button>
 
                             <button class="dropdown-item" type="button">
-                                <a class="nav-link" href="#"> Liste de Julie </a></button>
+                                <a class="nav-link" href="{{ path('app_giftlists_show', {'firstName': 'Julie'}) }}"> Idées cadeaux pour Julie </a></button>
 
                             <button class="dropdown-item" type="button">
                                 <a class="nav-link" href="#"> Liste commune </a></button>
