@@ -37,6 +37,15 @@
                         <div class="mt-1 pb-1 col-xl-4 col-md-12">
                             {% for book in row %}
                                 {% include 'layouts/partials/_bookcard.html.twig' %}
+                                <a href="#"
+                                   onclick="event.preventDefault(); confirm('Voulez-vous retirer ce livre de la collection?') && document.getElementById('js-collection-book-delete-form').submit();"
+                                   class="btn btn-light">Delete</a>
+                                <form id="js-collection-book-delete-form" action="{{ path('app_collections_book_remove', {'collection_id': collection.id, 'book_id':book.id}) }}"
+                                      method="post"
+                                      style="display: none">
+                                    <input type="text" name="csrf_token" value="{{ csrf_token('collection_book_deletion_' ~ collection.id) }}">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                </form>
                             {% endfor %}
                         </div>
                     {% endfor %}

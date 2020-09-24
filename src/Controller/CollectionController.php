@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Book;
 use App\Entity\BookCollection;
 use App\Form\CollectionType;
 use App\Repository\CollectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -103,5 +105,45 @@ class CollectionController extends AbstractController
         }
 
         return $this->redirectToRoute('collections');
+    }
+
+    /**
+     * @Route("/collections/{collection_id<[0-9]+>}/book/{book_id<[0-9]+>}", name="app_collections_book_add", methods={"PUT"})
+     * @ParamConverter("collection", class="App:BookCollection", options={"id": "collection_id"})
+     * @ParamConverter("book", class="App:Book", options={"id": "book_id"})
+     */
+    public function addCollectionBook(BookCollection $collection, Book $book, Request $request): Response
+    {
+        $form = $this->createForm(CollectionType::class, $collection, [
+            'method' => 'PUT'
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $collection->addBook($book);
+            $this->manager->persist($collection);
+            $this->manager->flush();
+            $this->addFlash('info','Le livre a été ajouté de la collection. ');
+        }
+
+        return $this->redirectToRoute('app_collections_show', ['id' => $collection->getId()]);
+    }
+
+    /**
+     * @Route("/collections/{collection_id<[0-9]+>}/book/{book_id<[0-9]+>}", name="app_collections_book_remove", methods={"DELETE"})
+     * @ParamConverter("collection", class="App:BookCollection", options={"id": "collection_id"})
+     * @ParamConverter("book", class="App:Book", options={"id": "book_id"})
+     */
+    public function removeCollectionBook(BookCollection $collection, Book $book, Request $request): Response
+    {
+        if($this->isCsrfTokenValid('collection_book_deletion_' . $collection->getId(), $request->request->get("csrf_token") ))
+        {
+            $collection->removeBook($book);
+            $this->manager->persist($collection);
+            $this->manager->flush();
+            $this->addFlash('info','Le livre a été retriré de la collection. ');
+        }
+
+        return $this->redirectToRoute('app_collections_show', ['id' => $collection->getId()]);
+
     }
 }

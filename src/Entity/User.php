@@ -62,9 +62,15 @@ class User implements UserInterface
      */
     private $library;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Gift::class, mappedBy="user")
+     */
+    private $gifts;
+
     public function __construct()
     {
         $this->library = new ArrayCollection();
+        $this->gifts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,5 +216,33 @@ class User implements UserInterface
     public function __toString(): string
     {
         return ucfirst($this->getFirstName());
+    }
+
+    /**
+     * @return Collection|Gift[]
+     */
+    public function getGifts(): Collection
+    {
+        return $this->gifts;
+    }
+
+    public function addGift(Gift $gift): self
+    {
+        if (!$this->gifts->contains($gift)) {
+            $this->gifts[] = $gift;
+            $gift->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGift(Gift $gift): self
+    {
+        if ($this->gifts->contains($gift)) {
+            $this->gifts->removeElement($gift);
+            $gift->removeUser($this);
+        }
+
+        return $this;
     }
 }

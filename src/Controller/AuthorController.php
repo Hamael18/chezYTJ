@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Author;
+use App\Entity\Book;
 use App\Form\AuthorType;
 use App\Repository\AuthorRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -101,6 +103,25 @@ class AuthorController extends AbstractController
         }
 
         return $this->redirectToRoute('authors');
+
+    }
+
+    /**
+     * @Route("/author/{author_id<[0-9]+>}/book/{book_id<[0-9]+>}", name="app_authors_book_remove", methods={"DELETE"})
+     * @ParamConverter("author", class="App:Author", options={"id": "author_id"})
+     * @ParamConverter("book", class="App:Book", options={"id": "book_id"})
+     */
+    public function removeAuthorBook(Author $author, Book $book, Request $request): Response
+    {
+        if($this->isCsrfTokenValid('author_book_deletion_' . $author->getId(), $request->request->get("csrf_token") ))
+        {
+            $author->removeBook($book);
+            $this->manager->persist($book);
+            $this->manager->flush();
+            $this->addFlash('info','Le livre a été retriré de l\'auteur⋅trice. ');
+        }
+
+        return $this->redirectToRoute('app_authors_show', ['id' => $author->getId()]);
 
     }
 }

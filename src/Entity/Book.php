@@ -190,17 +190,6 @@ class Book
         return $this;
     }
 
-    public function __toString(): string
-    {
-        $authors = $this->getAuthor();
-
-        if (!$authors) {
-            return $this->getTitle() . ' de inconnu.';
-        }
-
-        return $this->getTitle() . ' de ' . $authors[0] . '.';
-    }
-
     /**
      * If manually uploading a file (i.e. not using Symfony Form) ensure an instance
      * of 'UploadedFile' is injected into this setter to trigger the update. If this
@@ -236,5 +225,16 @@ class Book
         $this->imageName = $imageName;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        $authors = $this->getAuthor();
+
+        if (!$authors) {
+            return $this->getTitle() . ' de inconnu.';
+        }
+
+        return $this->getTitle() . ' de ' . $authors[0] . '.';
     }
 }
