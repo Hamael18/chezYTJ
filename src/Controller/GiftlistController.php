@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\GiftListType;
 use App\Repository\GiftRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -48,9 +49,9 @@ class GiftlistController extends AbstractController
     /**
      * @Route("/admin/giftlist/{id<[0-9]+>}/add", name="app_giftlists_add", methods={"GET", "POST"})
      */
-    public function add(Request $request, User $user): Response
+    public function addtoUserGiftList(Request $request, User $user): Response
     {
-        $form = $this->createForm(LibraryType::class, $user, [
+        $form = $this->createForm(GiftListType::class, $user, [
             'method' => 'POST'
         ]);
         $form->handleRequest($request);
