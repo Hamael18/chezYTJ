@@ -20,7 +20,7 @@
         "dev-server": "encore dev-server",
         "dev": "encore dev",
         "watch": "encore dev --watch",
-        "heroku-postbuild": "webpack -p --config ./resources/webpack/webpack.config.js"
+        "build": "encore production --progress"
     },
     "dependencies": {
         "@popperjs/core": "^2.4.4"
