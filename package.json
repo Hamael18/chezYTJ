@@ -12,6 +12,10 @@
     },
     "license": "UNLICENSED",
     "private": true,
+    "engines": {
+        "node": "10.x",
+        "npm": "6.x"
+    },
     "scripts": {
         "dev-server": "encore dev-server",
         "dev": "encore dev",
