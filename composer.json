@@ -89,6 +89,9 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
+        ],
+        "compile": [
+            "php bin/console d:m:m"
         ]
     },
     "conflict": {
@@ -99,5 +102,6 @@
             "allow-contrib": false,
             "require": "5.1.*"
         }
-    }
+    },
+
 }
