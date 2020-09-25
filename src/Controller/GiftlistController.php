@@ -59,12 +59,12 @@ class GiftlistController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
 
-            $this->addFlash('success',"Le livre a été ajouté à la bibliothèque de $user");
+            $this->addFlash('success',"Le cadeau a été ajouté à la liste de $user");
 
-            return $this->redirectToRoute('libraries');
+            return $this->redirectToRoute('giftlists');
         }
 
-        return $this->render('libraries/add.html.twig', [
+        return $this->render('giftlist/add.html.twig', [
             'form' => $form->createView(),
             'user' => $user
         ]);

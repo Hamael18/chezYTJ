@@ -12,12 +12,14 @@
         <div class="col-4 text-center">
             <div>
                 <h3>Bibliothèque de Yann</h3>
-                <a href="{{ path('app_libraries_show', {'firstName': 'Yann'}) }}"> <img class="img-fluid"
+                <a href="{{ path('app_libraries_show', {'firstName': 'Yann'}) }}">
+                    <img class="img-fluid"
                             src="{{ asset('build/images/biblio.jpg') }}" alt="Bibliothèque"></a>
             </div>
             <div>
                 <h3 class="mt-5">Idées cadeaux pour Yann</h3>
-                <img class="img-fluid" src="{{ asset('build/images/cadeau.jpg') }}" alt="Bibliothèque">
+                <a href="{{ path('app_giftlists_show', {'firstName': 'Yann'}) }}">
+                    <img class="img-fluid" src="{{ asset('build/images/cadeau.jpg') }}" alt="Cadeau"> </a>
             </div>
 
         </div>
@@ -29,8 +31,8 @@
             </div>
             <div>
                 <h3 class="mt-5">Idées cadeaux pour Thomas</h3>
-                <img class="img-fluid" src="{{ asset('build/images/cadeau.jpg') }}" alt="Bibliothèque">
-            </div>
+                <a href="{{ path('app_giftlists_show', {'firstName': 'Thomas'}) }}">
+                    <img class="img-fluid" src="{{ asset('build/images/cadeau.jpg') }}" alt="Cadeau"> </a>            </div>
         </div>
         <div class="col-4 text-center">
             <div>
@@ -40,8 +42,8 @@
             </div>
             <div>
                 <h3 class="mt-5">Idées cadeaux pour Julie</h3>
-                <img class="img-fluid" src="{{ asset('build/images/cadeau.jpg') }}" alt="Bibliothèque">
-            </div>
+                <a href="{{ path('app_giftlists_show', {'firstName': 'Julie'}) }}">
+                    <img class="img-fluid" src="{{ asset('build/images/cadeau.jpg') }}" alt="Cadeau"> </a>            </div>
         </div>
     </div>
 {% endblock %}

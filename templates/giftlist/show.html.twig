@@ -24,7 +24,7 @@
             </div>
             {% if giftNumber > 0 %}
                 <div class="d-flex flex-wrap bg-white shadow rounded">
-                    {% for row in user.gifts|batch(giftNumber/4) %}
+                    {% for row in user.gifts|batch(4) %}
                         <div class="mt-1 pb-1 col-xl-4 col-md-12">
                             {% for gift in row %}
                                 {% include 'layouts/partials/_giftcard.html.twig' %}

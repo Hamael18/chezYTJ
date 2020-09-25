@@ -25,9 +25,9 @@
             </div>
 
             {% if bookNumber > 0 %}
-                <div class="d-flex flex-wrap bg-white shadow rounded">
-                    {% for row in books|batch(bookNumber/3) %}
-                        <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                <div class="bg-white shadow rounded">
+                    {% for row in books|batch(3) %}
+                        <div class="row mt-1 pb-1">
                             {% for book in row %}
                                 {% include 'layouts/partials/_bookcard.html.twig' %}
                             {% endfor %}

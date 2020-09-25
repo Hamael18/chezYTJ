@@ -4,9 +4,11 @@
              src="{{ (book.imageName ? vich_uploader_asset(book) : asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
              alt="{{ book.title }}">
         <div class="card-body">
-            <h5 class="card-title">{{ book.title }}</a></h5>
+            <h5 class="card-title">{{ book.title }}</h5>
+    </a>
     <p class="card-subtitle mb-2 text-muted">
         {% for author in book.author %} {{ author.fullName }}{% if not loop.last %},  {% endif %} {% endfor %}
     </p>
     <p class="card-text text-muted">{{ book.description }}</p>
+        </div>
 </div>

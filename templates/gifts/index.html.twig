@@ -19,9 +19,9 @@
             </h1>
         </div>
             {% if giftsNumber > 0 %}
-                <div class="d-flex flex-wrap bg-white shadow rounded">
-                    {% for row in gifts|batch(giftsNumber/3) %}
-                        <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                <div class="bg-white shadow rounded">
+                    {% for row in gifts|batch(3) %}
+                        <div class="d-flex flex-wrap mt-1 pb-1">
                             {% for gift in row %}
                                 {% include 'layouts/partials/_giftcard.html.twig' %}
                             {% endfor %}
