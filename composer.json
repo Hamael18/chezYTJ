@@ -5,6 +5,7 @@
         "php": ">=7.2.5",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "ext-imagick": "^3.4",
         "amphp/http-client": "^4.5",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.0",
@@ -91,7 +92,7 @@
             "@auto-scripts"
         ],
         "compile": [
-            "php bin/console doctrine:migrations:migratte"
+            "php bin/console doctrine:migrations:migrate"
         ]
     },
     "conflict": {
