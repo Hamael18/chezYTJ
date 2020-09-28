@@ -26,14 +26,14 @@
 
         {% if collectionNumber > 0 %}
 
-            <div class="bg-white shadow rounded">
+            <div class="bg-white shadow rounded text-center">
                 {% for row in collections|batch(3) %}
                     <div class="row mt-1 pb-1">
                             {% for collection in row %}
-                                <h2 class="h5 pt-3 col-xl-4 col-md-12"><a
+                                <div class="pt-3 col-xl-4 col-md-12"><a
                                             href="{{ path('app_collections_show', {'id':collection.id}) }}"
                                             class="text-muted text-decoration-none text-secondary"> {{ collection.name }}</a>
-                                </h2>
+                                </div>
                             {% endfor %}
                     </div>
                 {% endfor %}

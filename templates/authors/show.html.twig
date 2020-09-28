@@ -28,20 +28,24 @@
             </div>
 
             {% if bookNumber > 0 %}
-            <div class="d-flex flex-wrap bg-white shadow rounded">
+            <div class="bg-white shadow rounded">
                 {% for row in author.books|batch(3) %}
-                    <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                    <div class="row mt-1 pb-1">
                         {% for book in row %}
+                            <div class="col">
                             {% include 'layouts/partials/_bookcard.html.twig' %}
-                            <a href="#"
+                                <div class="text-center">
+                        <a href="#"
                                onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre?') && document.getElementById('js-author-book-delete-form').submit();"
-                               class="btn btn-light">Supprimer</a>
+                               class="btn btn-light text-muted"><small>Retirer ce livre de l'auteur</small></a>
                             <form id="js-author-book-delete-form" action="{{ path('app_authors_book_remove', {'author_id': author.id, 'book_id':book.id}) }}"
                                   method="post"
                                   style="display: none">
                                 <input type="text" name="csrf_token" value="{{ csrf_token('author_book_deletion_' ~ author.id) }}">
                                 <input type="hidden" name="_method" value="DELETE">
                             </form>
+                                </div>
+                            </div>
                         {% endfor %}
                     </div>
                 {% endfor %}

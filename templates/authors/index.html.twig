@@ -19,7 +19,7 @@
         </div>
 
         {% if authorsNumber > 0 %}
-            <div class="bg-white shadow rounded">
+            <div class="bg-white shadow rounded text-center">
                 {% for row in authors|batch(3) %}
                     <div class="row mt-1 pb-1">
                         {% for author in row %}
