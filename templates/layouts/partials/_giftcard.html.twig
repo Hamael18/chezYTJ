@@ -6,7 +6,10 @@
         <div class="card-body">
             <h5 class="card-title">{{ gift.name }}</a></h5>
     <p class="card-subtitle mb-2 text-muted">
+        {% if gift.price %}
         {{ gift.price }} €
+        {% endif %}
+
     </p>
     <p class="card-text text-muted">{{ gift.description }}</p>
 </div>

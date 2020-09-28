@@ -7,32 +7,39 @@
         <div class="bg-white rounded shadow collection">
             <div class="pt-3">
                 <h1 class="text-center text-primary">
-                        {{ book.title }}
+                    {{ book.title }}
                 </h1>
                 <p class="text-muted text-center"><small> Ajouté⋅e en base de données le
-                            <time datetime="{{ book.createdAt|date('Y-m-d H:i:s') }}">{{ book.createdAt|date('Y-m-d') }} </time></small></p>
+                        <time datetime="{{ book.createdAt|date('Y-m-d H:i:s') }}">{{ book.createdAt|date('Y-m-d') }} </time>
+                    </small></p>
+                <h3 class="text-center">
+                    {% for author in book.author %} {{ author.fullName }}{% if not loop.last %},  {% endif %} {% endfor %}
+                </h3>
                 {% if book.collection %}
-                        <p class="pt-3 text-break text-center"> {{ book.collection.name }}</p>
+                    <p class="pt-3 text-break text-center"> {{ book.collection.name }}</p>
+                {% endif %}
             </div>
-            {% endif %}
             <div class="text-center">
-            <img class="img-fluid"
-                 src="{{(book.imageName ? vich_uploader_asset(book) : asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
-                 alt="{{ book.title}}">
+                <img class="img-fluid mb-5"
+                     src="{{ (book.imageName ? vich_uploader_asset(book) : asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+                     alt="{{ book.title }}">
             </div>
-                    <div class="text-center pt-3">
-                        <a href="{{ path('app_books_edit', {id: book.id}) }}" class="btn btn-light">Editer</a>
-                        <a href="https://google.com"
-                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre?') && document.getElementById('js-book-delete-form').submit();"
-                           class="btn btn-light">Supprimer</a>
-                        <form id="js-book-delete-form" action="{{ path('app_books_delete', {id: book.id}) }}" method="post"
-                              style="display: none">
-                            <input type="text" name="csrf_token" value="{{ csrf_token('book_deletion_' ~ book.id) }}">
-                            <input type="hidden" name="_method" value="DELETE">
-                        </form>
-                    </div>
+            {% if book.description %}<p class="text-center">{{ book.description }}</p> {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="text-center pt-3">
+                    <a href="{{ path('app_books_edit', {id: book.id}) }}" class="btn btn-light">Editer</a>
+                    <a href="https://google.com"
+                       onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre?') && document.getElementById('js-book-delete-form').submit();"
+                       class="btn btn-light">Supprimer</a>
+                    <form id="js-book-delete-form" action="{{ path('app_books_delete', {id: book.id}) }}" method="post"
+                          style="display: none">
+                        <input type="text" name="csrf_token" value="{{ csrf_token('book_deletion_' ~ book.id) }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                    </form>
                 </div>
+            {% endif %}
         </div>
+    </div>
     </div>
 
 

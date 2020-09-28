@@ -23,42 +23,43 @@
                 </h1>
             </div>
             {% if giftNumber > 0 %}
-                <div class="bg-white shadow rounded">
-                    {% for row in user.gifts|batch(4) %}
-                        <div class="row mt-1 pb-1">
-                            {% for gift in row %}
-                                <div class="col">
-                                    {% include 'layouts/partials/_giftcard.html.twig' %}
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                    <div class="text-center">
-                                        <a href="#"
-                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce cadeau de la liste?') && document.getElementById('js-user-gift-delete-form-{{ gift.id }}').submit();"
-                                           class="btn btn-light text-muted"><small>Retirer ce cadeau de
-                                                la liste</small></a>
-                                        <form id="js-user-gift-delete-form-{{ gift.id }}"
-                                              action="{{ path('app_user_gift_remove', {'user_id': user.id, 'gift_id': gift.id}) }}"
-                                              method="post"
-                                              style="display: none">
-                                            <input type="text" name="csrf_token"
-                                                   value="{{ csrf_token('user_gift_deletion_' ~ gift.id) }}">
-                                            <input type="hidden" name="_method" value="DELETE">
-                                        </form>
-                                        {% endif %}
-                                    </div>
+            <div class="bg-white shadow rounded">
+                {% for row in user.gifts|batch(4) %}
+                <div class="row mt-1 pb-1">
+                    {% for gift in row %}
+                        <div class="col">
+                            {% include 'layouts/partials/_giftcard.html.twig' %}
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <div class="text-center">
+                                    <a href="#"
+                                       onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce cadeau de la liste?') && document.getElementById('js-user-gift-delete-form-{{ gift.id }}').submit();"
+                                       class="btn btn-light text-muted"><small>Retirer ce cadeau de
+                                            la liste</small></a>
+                                    <form id="js-user-gift-delete-form-{{ gift.id }}"
+                                          action="{{ path('app_user_gift_remove', {'user_id': user.id, 'gift_id': gift.id}) }}"
+                                          method="post"
+                                          style="display: none">
+                                        <input type="text" name="csrf_token"
+                                               value="{{ csrf_token('user_gift_deletion_' ~ gift.id) }}">
+                                        <input type="hidden" name="_method" value="DELETE">
+                                    </form>
                                 </div>
-                            {% endfor %}
+                            {% endif %}
                         </div>
                     {% endfor %}
                 </div>
-
-            {% else %}
-                <div class="text-center mt-5 h1"> Aucun cadeau dans la liste !
-                    {% if app.user %}<a href="{{ path('app_gifts_create') }}">
-                            Ajouter un premier cadeau ici !</a>
-                    {% endif %}
-                </div>
-            {% endif %}
+            </div>
+            {% endfor %}
         </div>
+
+        {% else %}
+            <div class="text-center mt-5 h1"> Aucun cadeau dans la liste !
+                {% if app.user %}<a href="{{ path('app_gifts_create') }}">
+                        Ajouter un premier cadeau ici !</a>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
     </div>
 
 

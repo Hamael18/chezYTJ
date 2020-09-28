@@ -12,11 +12,16 @@
                 <p class="text-muted text-center"><small> Ajouté⋅e en base de données le
                         <time datetime="{{ gift.createdAt|date('Y-m-d H:i:s') }}">{{ gift.createdAt|date('d/m/Y') }} </time></small></p>
             </div>
+            {% if gift.price %}
+            <p class="text-center">{{ gift.price }} €</p>
+            {% endif %}
             <div class="text-center">
                 <img class="img-fluid"
                      src="{{(gift.imageName ? vich_uploader_asset(gift) : asset('build/images/cadeau.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
                      alt="{{ gift.name}}">
             </div>
+            {% if gift.description %}<p class="text-center">{{ gift.description }}</p> {% endif %}
+
             <div class="text-center pt-3">
                 <a href="{{ path('app_gifts_edit', {id: gift.id}) }}" class="btn btn-light">Editer</a>
                 <a href="https://google.com"

@@ -10,24 +10,23 @@
             <div class="pt-3">
                 <h1 class="text-center text-primary">
                     {{ author.fullname }}
+                        <a href="{{ path('app_authors_edit', {id: author.id}) }}" class="btn btn-light">Editer</a>
+                        <a href="#"
+                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer cet⋅te auteur⋅trice?') && document.getElementById('js-author-delete-form').submit();"
+                           class="btn btn-light">Supprimer</a>
+                        <form id="js-author-delete-form" action="{{ path('app_authors_delete', {id: author.id}) }}"
+                              method="post"
+                              style="display: none">
+                            <input type="text" name="csrf_token" value="{{ csrf_token('author_deletion_' ~ author.id) }}">
+                            <input type="hidden" name="_method" value="DELETE">
+                        </form>
                 </h1>
                 <p class="text-muted text-center"><small> Ajouté⋅e en base de données le
                         <time datetime="{{ author.createdAt|date('Y-m-d H:i:s') }}">{{ author.createdAt|date('Y-m-d') | date('m/d/Y') }} </time>
                     </small></p>
             </div>
-            <div class="text-center pb-3">
-                <a href="{{ path('app_authors_edit', {id: author.id}) }}" class="btn btn-light">Editer</a>
-                <a href="#"
-                   onclick="event.preventDefault(); confirm('Voulez-vous supprimer cet⋅te auteur⋅trice?') && document.getElementById('js-author-delete-form').submit();"
-                   class="btn btn-light">Supprimer</a>
-                <form id="js-author-delete-form" action="{{ path('app_authors_delete', {id: author.id}) }}"
-                      method="post"
-                      style="display: none">
-                    <input type="text" name="csrf_token" value="{{ csrf_token('author_deletion_' ~ author.id) }}">
-                    <input type="hidden" name="_method" value="DELETE">
-                </form>
-            </div>
 
+            <h3 class="text-center">Ses livres</h3>
             {% if bookNumber > 0 %}
                 <div class="bg-white shadow rounded">
                     {% for row in author.books|batch(3) %}
