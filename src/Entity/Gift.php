@@ -54,7 +54,7 @@ class Gift
     private $imageName;
 
     /**
-     * @ORM\ManyToMany(targetEntity=User::class, inversedBy="gifts")
+     * @ORM\ManyToMany(targetEntity=User::class, mappedBy="gifts")
      */
     private $user;
 

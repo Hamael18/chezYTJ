@@ -63,7 +63,7 @@ class User implements UserInterface
     private $library;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Gift::class, mappedBy="user")
+     * @ORM\ManyToMany(targetEntity=Gift::class, inversedBy="user")
      */
     private $gifts;
 

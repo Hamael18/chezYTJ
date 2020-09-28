@@ -51,7 +51,7 @@ class GiftlistController extends AbstractController
     /**
      * @Route("/admin/giftlist/{id<[0-9]+>}/add", name="app_giftlists_add", methods={"GET", "POST"})
      */
-    public function addtoUserGiftList(Request $request, User $user): Response
+    public function add(Request $request, User $user): Response
     {
         $form = $this->createForm(GiftListType::class, $user, [
             'method' => 'POST'
@@ -77,17 +77,18 @@ class GiftlistController extends AbstractController
      * @ParamConverter("user", class="App:User", options={"id": "user_id"})
      * @ParamConverter("gift", class="App:Gift", options={"id": "gift_id"})
      */
-    public function removeAuthorBook(User $user, Gift $gift, Request $request): Response
+    public function remove(User $user, Gift $gift, Request $request): Response
     {
-        if($this->isCsrfTokenValid('user_gift_deletion_' . $user->getId(), $request->request->get("csrf_token") ))
+        dd($gift);
+        if($this->isCsrfTokenValid('user_gift_deletion_' . $gift->getId(), $request->request->get("csrf_token") ))
         {
-            $user->removeBook($gift);
+            $user->removeGift($gift);
             $this->manager->persist($gift);
             $this->manager->flush();
             $this->addFlash('info',"Le cadeau a été retriré de la liste de $user.");
         }
 
-        return $this->redirectToRoute('app_authors_show', ['id' => $user->getId()]);
+        return $this->redirectToRoute('app_giftlists_show', ['firstName' => $user->getFirstName()]);
 
     }
 }

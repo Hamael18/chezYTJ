@@ -23,11 +23,31 @@
                 </h1>
             </div>
             {% if giftNumber > 0 %}
-                <div class="d-flex flex-wrap bg-white shadow rounded">
+                <div class="bg-white shadow rounded">
                     {% for row in user.gifts|batch(4) %}
-                        <div class="mt-1 pb-1 col-xl-4 col-md-12">
+                        <div class="row mt-1 pb-1">
                             {% for gift in row %}
-                                {% include 'layouts/partials/_giftcard.html.twig' %}
+                                <div class="col">
+                                    {% include 'layouts/partials/_giftcard.html.twig' %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <div class="text-center">
+                                        <a href="#"
+                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce cadeau de la liste?') && document.getElementById('js-user-gift-delete-form').submit();"
+                                           class="btn btn-light text-muted"><small>Retirer ce cadeau de
+                                                la liste</small></a>
+                                        {{ dump(gift.id) }}
+
+                                        <form id="js-user-gift-delete-form"
+                                              action="{{ path('app_user_gift_remove', {'user_id': user.id, 'gift_id':gift.id}) }}"
+                                              method="post"
+                                              style="display: none">
+                                            <input type="text" name="csrf_token"
+                                                   value="{{ csrf_token('user_gift_deletion_' ~ gift.id) }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
                             {% endfor %}
                         </div>
                     {% endfor %}

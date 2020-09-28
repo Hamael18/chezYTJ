@@ -25,10 +25,29 @@
             {% if bookNumber > 0 %}
                 <div class="bg-white shadow rounded">
                     {% for row in user.library|batch(3) %}
-                        <div class="d-flex flex-wrap mt-1 pb-1">
-                                {% for book in row %}
+                        <div class="row mt-1 pb-1">
+                            {% for book in row %}
+                                <div class="col">
                                     {% include 'layouts/partials/_bookcard.html.twig' %}
-                                {% endfor %}
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <div class="text-center">
+                                        <a href="#"
+                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre de la bibliothéque?') && document.getElementById('js-user-book-delete-form').submit();"
+                                           class="btn btn-light text-muted"><small>Retirer ce livre de
+                                                la bibliothèque</small></a>
+
+                                        <form id="js-user-book-delete-form"
+                                              action="{{ path('app_user_book_remove', {'user_id': user.id, 'book_id': book.id}) }}"
+                                              method="post"
+                                              style="display: none">
+                                            <input type="text" name="csrf_token"
+                                                   value="{{ csrf_token('user_book_deletion_' ~ book.id) }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                        </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
                         </div>
                     {% endfor %}
                 </div>
@@ -36,7 +55,7 @@
             {% else %}
                 <div class="text-center mt-5 h1"> Aucun livre !
                     {% if app.user %}<a href="{{ path('app_books_create') }}">
-                        Ajouter un premier livre ici !</a>
+                            Ajouter un premier livre ici !</a>
                     {% endif %}
                 </div>
             {% endif %}
