@@ -79,11 +79,10 @@ class GiftlistController extends AbstractController
      */
     public function remove(User $user, Gift $gift, Request $request): Response
     {
-        dd($gift);
         if($this->isCsrfTokenValid('user_gift_deletion_' . $gift->getId(), $request->request->get("csrf_token") ))
         {
             $user->removeGift($gift);
-            $this->manager->persist($gift);
+            $this->manager->persist($user);
             $this->manager->flush();
             $this->addFlash('info',"Le cadeau a été retriré de la liste de $user.");
         }

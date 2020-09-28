@@ -32,11 +32,11 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <div class="text-center">
                                         <a href="#"
-                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre de la bibliothéque?') && document.getElementById('js-user-book-delete-form').submit();"
+                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre de la bibliothéque?') && document.getElementById('js-user-book-delete-form-{{ book.id }}').submit();"
                                            class="btn btn-light text-muted"><small>Retirer ce livre de
                                                 la bibliothèque</small></a>
 
-                                        <form id="js-user-book-delete-form"
+                                        <form id="js-user-book-delete-form-{{ book.id }}"
                                               action="{{ path('app_user_book_remove', {'user_id': user.id, 'book_id': book.id}) }}"
                                               method="post"
                                               style="display: none">

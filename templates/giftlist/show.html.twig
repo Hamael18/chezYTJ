@@ -32,13 +32,11 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <div class="text-center">
                                         <a href="#"
-                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce cadeau de la liste?') && document.getElementById('js-user-gift-delete-form').submit();"
+                                           onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce cadeau de la liste?') && document.getElementById('js-user-gift-delete-form-{{ gift.id }}').submit();"
                                            class="btn btn-light text-muted"><small>Retirer ce cadeau de
                                                 la liste</small></a>
-                                        {{ dump(gift.id) }}
-
-                                        <form id="js-user-gift-delete-form"
-                                              action="{{ path('app_user_gift_remove', {'user_id': user.id, 'gift_id':gift.id}) }}"
+                                        <form id="js-user-gift-delete-form-{{ gift.id }}"
+                                              action="{{ path('app_user_gift_remove', {'user_id': user.id, 'gift_id': gift.id}) }}"
                                               method="post"
                                               style="display: none">
                                             <input type="text" name="csrf_token"
