@@ -21,10 +21,10 @@
                  alt="{{ book.title}}">
             </div>
                     <div class="text-center pt-3">
-                        <a href="{{ path('app_books_edit', {id: book.id}) }}" class="btn btn-light">Edit</a>
+                        <a href="{{ path('app_books_edit', {id: book.id}) }}" class="btn btn-light">Editer</a>
                         <a href="https://google.com"
                            onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre?') && document.getElementById('js-book-delete-form').submit();"
-                           class="btn btn-light">Delete</a>
+                           class="btn btn-light">Supprimer</a>
                         <form id="js-book-delete-form" action="{{ path('app_books_delete', {id: book.id}) }}" method="post"
                               style="display: none">
                             <input type="text" name="csrf_token" value="{{ csrf_token('book_deletion_' ~ book.id) }}">

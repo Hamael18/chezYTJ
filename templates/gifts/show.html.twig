@@ -18,10 +18,10 @@
                      alt="{{ gift.name}}">
             </div>
             <div class="text-center pt-3">
-                <a href="{{ path('app_gifts_edit', {id: gift.id}) }}" class="btn btn-light">Edit</a>
+                <a href="{{ path('app_gifts_edit', {id: gift.id}) }}" class="btn btn-light">Editer</a>
                 <a href="https://google.com"
                    onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre?') && document.getElementById('js-gift-delete-form').submit();"
-                   class="btn btn-light">Delete</a>
+                   class="btn btn-light">Supprimer</a>
                 <form id="js-gift-delete-form" action="{{ path('app_gifts_delete', {id: gift.id}) }}" method="post"
                       style="display: none">
                     <input type="text" name="csrf_token" value="{{ csrf_token('gift_deletion_' ~ gift.id) }}">

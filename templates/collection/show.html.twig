@@ -19,10 +19,10 @@
 
 
             <div class="pt-3 text-center">
-                <a href="{{ path('app_collections_edit', {id: collection.id}) }}" class="btn btn-light">Edit</a>
+                <a href="{{ path('app_collections_edit', {id: collection.id}) }}" class="btn btn-light">Editer</a>
                 <a href="https://google.com"
                    onclick="event.preventDefault(); confirm('Voulez-vous supprimer cette collection?') && document.getElementById('js-collection-delete-form').submit();"
-                   class="btn btn-light">Delete</a>
+                   class="btn btn-light">Supprimer</a>
                 <form id="js-collection-delete-form" action="{{ path('app_collections_delete', {id: collection.id}) }}"
                       method="post"
                       style="display: none">

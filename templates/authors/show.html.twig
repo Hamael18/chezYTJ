@@ -15,10 +15,10 @@
                         <time datetime="{{ author.createdAt|date('Y-m-d H:i:s') }}">{{ author.createdAt|date('Y-m-d') | date('m/d/Y') }} </time></small></p>
             </div>
             <div class="text-center pb-3">
-                <a href="{{ path('app_authors_edit', {id: author.id}) }}" class="btn btn-light">Edit</a>
+                <a href="{{ path('app_authors_edit', {id: author.id}) }}" class="btn btn-light">Editer</a>
                 <a href="#"
                    onclick="event.preventDefault(); confirm('Voulez-vous supprimer cet⋅te auteur⋅trice?') && document.getElementById('js-author-delete-form').submit();"
-                   class="btn btn-light">Delete</a>
+                   class="btn btn-light">Supprimer</a>
                 <form id="js-author-delete-form" action="{{ path('app_authors_delete', {id: author.id}) }}"
                       method="post"
                       style="display: none">
@@ -35,7 +35,7 @@
                             {% include 'layouts/partials/_bookcard.html.twig' %}
                             <a href="#"
                                onclick="event.preventDefault(); confirm('Voulez-vous supprimer ce livre?') && document.getElementById('js-author-book-delete-form').submit();"
-                               class="btn btn-light">Delete</a>
+                               class="btn btn-light">Supprimer</a>
                             <form id="js-author-book-delete-form" action="{{ path('app_authors_book_remove', {'author_id': author.id, 'book_id':book.id}) }}"
                                   method="post"
                                   style="display: none">

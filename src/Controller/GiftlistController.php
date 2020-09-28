@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Gift;
 use App\Entity\User;
 use App\Form\GiftListType;
 use App\Repository\GiftRepository;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,5 +70,24 @@ class GiftlistController extends AbstractController
             'form' => $form->createView(),
             'user' => $user
         ]);
+    }
+
+    /**
+     * @Route("/user/{user_id<[0-9]+>}/gift/{gift_id<[0-9]+>}", name="app_user_gift_remove", methods={"DELETE"})
+     * @ParamConverter("user", class="App:User", options={"id": "user_id"})
+     * @ParamConverter("gift", class="App:Gift", options={"id": "gift_id"})
+     */
+    public function removeAuthorBook(User $user, Gift $gift, Request $request): Response
+    {
+        if($this->isCsrfTokenValid('user_gift_deletion_' . $user->getId(), $request->request->get("csrf_token") ))
+        {
+            $user->removeBook($gift);
+            $this->manager->persist($gift);
+            $this->manager->flush();
+            $this->addFlash('info',"Le cadeau a été retriré de la liste de $user.");
+        }
+
+        return $this->redirectToRoute('app_authors_show', ['id' => $user->getId()]);
+
     }
 }
