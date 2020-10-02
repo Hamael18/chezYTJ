@@ -7,6 +7,7 @@
         "ext-iconv": "*",
         "ext-imagick": "^3.4",
         "amphp/http-client": "^4.5",
+        "cloudinary/cloudinary_php": "^1.18",
         "composer/package-versions-deprecated": "^1.11",
         "doctrine/annotations": "^1.0",
         "doctrine/doctrine-bundle": "^2.1",

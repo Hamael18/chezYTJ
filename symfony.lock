@@ -38,6 +38,9 @@
     "amphp/windows-registry": {
         "version": "v0.3.3"
     },
+    "cloudinary/cloudinary_php": {
+        "version": "1.18.0"
+    },
     "composer/package-versions-deprecated": {
         "version": "1.11.99"
     },

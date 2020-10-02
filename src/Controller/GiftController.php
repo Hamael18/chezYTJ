@@ -88,10 +88,9 @@ class GiftController extends AbstractController
      */
     public function delete(Request $request, Gift $gift): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$gift->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($gift);
-            $entityManager->flush();
+        if ($this->isCsrfTokenValid('gift_deletion_'.$gift->getId(), $request->request->get('csrf_token'))) {
+            $this->manager->remove($gift);
+            $this->manager->flush();
         }
 
         return $this->redirectToRoute('gifts');
