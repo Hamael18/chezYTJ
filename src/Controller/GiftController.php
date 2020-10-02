@@ -5,8 +5,10 @@ namespace App\Controller;
 use App\Entity\Gift;
 use App\Form\GiftType;
 use App\Repository\GiftRepository;
+use Cloudinary\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -40,9 +42,8 @@ class GiftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($gift);
-            $entityManager->flush();
+            $this->manager->persist($gift);
+            $this->manager->flush();
             $this->addFlash('success','Le cadeau a été créé⋅e');
 
             return $this->redirectToRoute('gifts');
