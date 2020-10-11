@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Gift;
 use App\Form\GiftType;
 use App\Repository\GiftRepository;
+use App\Service\UploadCloudinary;
 use Cloudinary\Uploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,10 +17,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class GiftController extends AbstractController
 {
     private $manager;
+    /**
+     * @var UploadCloudinary
+     */
+    private $uploadCloudinary;
 
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, UploadCloudinary $uploadCloudinary)
     {
         $this->manager = $manager;
+        $this->uploadCloudinary = $uploadCloudinary;
     }
 
     /**
@@ -42,9 +48,10 @@ class GiftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $gift->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
             $this->manager->persist($gift);
             $this->manager->flush();
-            $this->addFlash('success','Le cadeau a été créé⋅e');
+            $this->addFlash('success','Le cadeau a été créé');
 
             return $this->redirectToRoute('gifts');
         }

@@ -1,7 +1,7 @@
 <div class="mt-3 mx-auto" style="width: 20rem;">
     <a href="{{ path('app_gifts_show', {'id':gift.id}) }}" class="text-decoration-none text-dark">
         <img class="img-fluid"
-             src="{{ (gift.imageName ? vich_uploader_asset(gift) : asset('build/images/cadeau.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+             src="{{(gift.imageUrl ? gift.imageUrl : (asset('build/images/cadeau.jpg')) | imagine_filter('squared_thumbnail_medium')) }}"
              alt="{{ gift.name }}">
         <div class="card-body">
             <h5 class="card-title">{{ gift.name }}</a></h5>

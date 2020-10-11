@@ -63,6 +63,11 @@ class Gift
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $imageUrl;
+
     public function __construct()
     {
         $this->user = new ArrayCollection();
@@ -175,5 +180,17 @@ class Gift
     public function __toString(): string
     {
         return $this->getName();
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(string $imageUrl): self
+    {
+        $this->imageUrl = $imageUrl;
+
+        return $this;
     }
 }

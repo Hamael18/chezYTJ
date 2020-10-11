@@ -17,7 +17,7 @@
             {% endif %}
             <div class="text-center">
                 <img class="img-fluid"
-                     src="{{(gift.imageName ? vich_uploader_asset(gift) : asset('build/images/cadeau.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+                     src="{{(gift.imageUrl ? gift.imageUrl : (asset('build/images/cadeau.jpg')) | imagine_filter('squared_thumbnail_medium')) }}"
                      alt="{{ gift.name}}">
             </div>
             {% if gift.description %}<p class="text-center">{{ gift.description }}</p> {% endif %}
