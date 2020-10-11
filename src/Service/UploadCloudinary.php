@@ -18,7 +18,7 @@ class UploadCloudinary
     {
         /** @var UploadedFile $file */
         $file = $form->get('imageFile')->getData();
-        $fileName = 'uploads/' . $file->getClientOriginalName();
+        $fileName = 'uploads/' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
         \Cloudinary::config([
             "cloud_name" => $_ENV['CLOUD_NAME'],
             "api_key" => $_ENV['API_KEY'],

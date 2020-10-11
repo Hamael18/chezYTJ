@@ -52,12 +52,10 @@ class BookController extends AbstractController
         $book = new Book ();
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $book->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
             $this->manager->persist($book);
             $this->manager->flush();
-
             $this->addFlash('success','Le livre a été créé.');
 
             return $this->redirectToRoute('books');
@@ -79,8 +77,10 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->get('imageFile')->getData()) {
+                $book->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
+            }
             $this->manager->flush();
-
             $this->addFlash('success','Le livre a été édité.');
 
             return $this->redirectToRoute('books');

@@ -80,7 +80,11 @@ class GiftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            if ($form->get('imageFile')->getData()) {
+                $gift->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
+            }
+            $this->manager->flush();
+            $this->addFlash('success','Le cadeau a été édité.');
 
             return $this->redirectToRoute('gifts');
         }
