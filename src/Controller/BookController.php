@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Book;
 use App\Form\BookType;
 use App\Repository\BookRepository;
+use App\Service\UploadCloudinary;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,10 +15,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class BookController extends AbstractController
 {
     private $manager;
+    /**
+     * @var UploadCloudinary
+     */
+    private $uploadCloudinary;
 
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, UploadCloudinary $uploadCloudinary)
     {
         $this->manager = $manager;
+        $this->uploadCloudinary = $uploadCloudinary;
     }
 
     /**
@@ -48,10 +54,11 @@ class BookController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $book->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
             $this->manager->persist($book);
             $this->manager->flush();
 
-            $this->addFlash('success','Le livre a été créé');
+            $this->addFlash('success','Le livre a été créé.');
 
             return $this->redirectToRoute('books');
         }
@@ -74,7 +81,7 @@ class BookController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->manager->flush();
 
-            $this->addFlash('success','Le livre a été édité');
+            $this->addFlash('success','Le livre a été édité.');
 
             return $this->redirectToRoute('books');
         }
@@ -94,7 +101,7 @@ class BookController extends AbstractController
         {
             $this->manager->remove($book);
             $this->manager->flush();
-            $this->addFlash('info','Le livre a été supprimé');
+            $this->addFlash('info','Le livre a été supprimé.');
 
         }
 

@@ -1,7 +1,7 @@
 <div class="mt-3 mx-auto" style="width: 20rem;">
     <a href="{{ path('app_books_show', {'id':book.id}) }}" class="text-decoration-none text-dark">
         <img class="img-fluid"
-             src="{{ (book.imageName ? vich_uploader_asset(book) : asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+             src="{{ (book.imageUrl ? book.imageUrl : (asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium')) }}"
              alt="{{ book.title }}">
         <div class="card-body">
             <h5 class="card-title">{{ book.title }}</h5>

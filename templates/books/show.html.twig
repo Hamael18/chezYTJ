@@ -21,7 +21,7 @@
             </div>
             <div class="text-center">
                 <img class="img-fluid mb-5"
-                     src="{{ (book.imageName ? vich_uploader_asset(book) : asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium') }}"
+                     src="{{ (book.imageUrl ? book.imageUrl : (asset('build/images/book.jpg')) | imagine_filter('squared_thumbnail_medium')) }}"
                      alt="{{ book.title }}">
             </div>
             {% if book.description %}<p class="text-center">{{ book.description }}</p> {% endif %}
