@@ -13,6 +13,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class UploadCloudinary
 {
+    public function handleImageCloudinary($form, $entity)
+    {
+        if ($form->get('imageFile')->getData()) {
+            $entity->setImageUrl($this->uploadToCloundinary($form));
+        }
+    }
 
     public function uploadToCloundinary($form)
     {

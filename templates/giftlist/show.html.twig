@@ -2,7 +2,7 @@
 {% block title %} Idées cadeaux pour {{ user.firstName }} {% endblock %}
 
 {% block body %}
-    {% set giftNumber = user.library | length %}
+    {% set giftNumber = user.gifts | length %}
 
     <div class="col-md-10 mx-auto">
         <div class="bg-white rounded shadow collection">

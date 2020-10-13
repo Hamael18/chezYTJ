@@ -48,7 +48,7 @@ class GiftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $gift->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
+            $this->uploadCloudinary->handleImageCloudinary($form, $gift);
             $this->manager->persist($gift);
             $this->manager->flush();
             $this->addFlash('success','Le cadeau a été créé');
@@ -80,9 +80,7 @@ class GiftController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($form->get('imageFile')->getData()) {
-                $gift->setImageUrl($this->uploadCloudinary->uploadToCloundinary($form));
-            }
+            $this->uploadCloudinary->handleImageCloudinary($form, $gift);
             $this->manager->flush();
             $this->addFlash('success','Le cadeau a été édité.');
 
