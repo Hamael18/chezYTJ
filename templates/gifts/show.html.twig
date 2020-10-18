@@ -6,14 +6,14 @@
     <div class="col-md-10 mx-auto">
         <div class="bg-white rounded shadow collection">
             <div class="pt-3">
-                <h1 class="text-center text-primary">
-                    {{ gift.name }}
+                <h1 class="text-center text-primary text-decoration-none"><a class="text-primary" href="{{ gift.url }}">
+                    {{ gift.name }} </a>
                 </h1>
                 <p class="text-muted text-center"><small> Ajouté⋅e en base de données le
                         <time datetime="{{ gift.createdAt|date('Y-m-d H:i:s') }}">{{ gift.createdAt|date('d/m/Y') }} </time></small></p>
             </div>
             {% if gift.price %}
-            <p class="text-center">{{ gift.price }} €</p>
+                <a class="text-primary" href="{{ gift.url }}"><p class="text-center">{{ gift.price }} €</p></a>
             {% endif %}
             <div class="text-center">
                 <img class="img-fluid"
